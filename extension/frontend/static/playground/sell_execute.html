@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles/flowbite.css">
+    <link rel="stylesheet" href="../../styles/global.css">
+    <title>flowtrade.fun</title>
+    <script src="../../scripts/global.js"></script>
+    <style>
+        .option {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            height: 4rem;
+            background-color: #18181B;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .icon-holder {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2.4rem;
+            height: 2.4rem;
+            background-color: rgb(26, 26, 26);
+            border-radius: 50%;
+            margin-left: 0.9rem;
+            overflow: hidden;
+        }
+
+        .name-holder {
+            position: relative;
+            top: 1.4rem;
+            color: white;
+            margin-left: 0.8rem;
+        }
+
+        .name-holder p {
+            font-size: 15px;
+        }
+
+        .arror-holder {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 2rem;
+            height: 100%;
+            right: 1.2rem;
+        }
+    </style>
+    <style>
+        .success-animation {
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 3rem 0 3rem 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 22px;
+            font-weight: 500;
+            padding-bottom: 1rem;
+        }
+
+        p {
+            text-align: center;
+            color: #727272;
+            margin-bottom: 11rem;
+            font-size: 16px;
+        }
+
+        .large-button-cus {
+            display: flex;
+            flex-direction: row;
+            -webkit-box-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            align-items: center;
+            padding: 14px 0px;
+            width: 100%;
+            height: 45px;
+            border-radius: 2px;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 19px;
+            pointer-events: auto;
+            border: none;
+            outline-color: transparent;
+            outline-style: none;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            background: #5c51ff;
+            color: white;
+        }
+
+        .checkmark {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #4bb71b;
+            stroke-miterlimit: 10;
+            box-shadow: inset 0px 0px 0px #4bb71b;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+            position: relative;
+            top: 5px;
+            right: 5px;
+            margin: 0 auto;
+        }
+
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #4bb71b;
+            fill: #1F1F21;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes scale {
+
+            0%,
+            100% {
+                transform: none;
+            }
+
+            50% {
+                transform: scale3d(1.1, 1.1, 1);
+            }
+        }
+
+        @keyframes fill {
+            100% {
+                box-shadow: inset 0px 0px 0px 30px #4bb71b;
+            }
+        }
+    </style>
+</head>
+
+<body class="ns">
+    <header class="tradeview-header">
+        <div class="navigation">
+            <div class="logoHolder">
+                <img src="http://tradeflow.fun/images/logo_light.svg" alt="tradeflow.fun" width="100%" height="auto">
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+
+        <div class="success-animation">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+            </svg>
+        </div>
+
+        <h1 id="order-status">Sell-Order Executed!</h1>
+        <p>Your transaction has been added successfully!</p>
+
+        <button class="large-button-cus mt-8" id="minimizeButton">OK</button>
+
+    </div>
+
+    <script src="../../scripts/popup_minimize.js"></script>
+</body>
+
+</html>

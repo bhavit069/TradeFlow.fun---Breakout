@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/flowbite.css">
+    <link rel="stylesheet" href="styles/global.css">
+    <title>tradeflow.fun</title>
+    <style>
+        #loading_overlay {
+            position: fixed;
+            display: block;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+        }
+
+        .loading_text {
+            color: #969393;
+        }
+
+        .loaing-parent-div {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .spinner-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body class="ns">
+    <div id="loading_overlay">
+        <div class="flex h-screen justify-center items-center">
+            <div class="loaing-parent-div">
+                <div class="mb-3">
+                    <div role="status" class="spinner-box ">
+                        <svg aria-hidden="true" role="status" class="inline w-6 h-6 me-3 text-white animate-spin"
+                            viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                fill="#E5E7EB" />
+                            <path
+                                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                fill="currentColor" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="loading_text">
+                    <p class="text-center">Establishing Route, Please Wait...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header class="tradeview-header">
+        <div class="navigation">
+            <div class="logoHolder">
+                <img src="http://tradeflow.fun/images/logo_light.svg" alt="tradeflow.fun" width="100%" height="auto">
+            </div>
+        </div>
+
+        <div class="balance-holder-parent">
+            <div class="sol-ico">
+                <svg width="16" height="16" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M1.33872 4.0155C1.36842 3.9858 1.40925 3.96848 1.45256 3.96848H5.38033C5.45207 3.96848 5.48798 4.0551 5.43724 4.10583L4.66136 4.88173C4.63166 4.91143 4.59081 4.92875 4.54748 4.92875H0.619748C0.547975 4.92875 0.512086 4.84213 0.562825 4.79139L1.33872 4.0155Z"
+                        fill="#727272" />
+                    <path
+                        d="M1.33872 1.11846C1.36966 1.08876 1.41049 1.07144 1.45256 1.07144H5.38033C5.45207 1.07144 5.48798 1.15806 5.43724 1.2088L4.66136 1.9847C4.63166 2.0144 4.59081 2.03172 4.54748 2.03172H0.619748C0.547975 2.03172 0.512086 1.9451 0.562825 1.89436L1.33872 1.11846Z"
+                        fill="#727272" />
+                    <path
+                        d="M4.66136 2.55734C4.63166 2.52764 4.59081 2.51031 4.54748 2.51031H0.619748C0.547975 2.51031 0.512086 2.59694 0.562825 2.64768L1.33872 3.42357C1.36842 3.45327 1.40925 3.47059 1.45256 3.47059H5.38033C5.45207 3.47059 5.48798 3.38397 5.43724 3.33324L4.66136 2.55734Z"
+                        fill="#727272" />
+                </svg>
+            </div>
+            <div>
+                <p class="sol-bal" id="sol-bal" value=""></p>
+            </div>
+        </div>
+    </header>
+    <script src="popup.js"></script>
+</body>
+
+</html>

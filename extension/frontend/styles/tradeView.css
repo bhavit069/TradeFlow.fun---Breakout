@@ -1,0 +1,178 @@
+.buy-sell-tab {
+    width: 100%;
+    margin: auto;
+    height: 4rem;
+}
+
+.tab-list-parent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-edu-ico {
+    position: relative;
+    display: flex;
+    align-items: center;
+    right: 0.3rem;
+}
+
+.coin-image-placeholder {
+    width: 42px;
+    height: 42px;
+}
+
+.price-taker-input-parent {
+    width: 130px;
+}
+
+.price-taker-input-parent {
+    display: flex;
+    flex-direction: column;
+}
+
+.presets-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    width: 100%;
+    height: 2rem;
+    padding-top: 0.3rem;
+}
+
+.preset-option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 37px;
+    height: 25px;
+    background-color: #18181B;
+    font-size: 12px;
+    color: #777777;
+    margin: 3.5px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+}
+
+.preset-option:hover {
+    background-color: #1d1d1d;
+    color: #9a9999;
+}
+
+.slippage-taker-input-parent-main {
+    width: 175px;
+}
+
+.price-taker-input-parent-main {
+    width: 172px;
+}
+
+.slippage-taker-input-parent {
+    height: 42px;
+    display: flex;
+    flex-direction: column;
+}
+
+.price-taker-input {
+    background: rgb(24, 24, 24);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(47, 47, 47);
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    line-height: 19px;
+
+}
+
+.sol-image-buy-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sol-image-buy-img {
+    width: 32px;
+    height: 32px;
+}
+
+.pricing-style {
+    background-color: #18181B;
+    padding-top: 6px;
+    padding-bottom: 8px;
+    border-radius: 10px;
+}
+
+.pricing-label {
+    color: #727272;
+    font-weight: 500;
+    padding-bottom: 2px;
+    font-size: 14px;
+}
+
+.price-label {
+    color: #fff;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.minimum-tokens {
+    color: #727272;
+    font-size: 14px;
+}
+
+.buy-button {
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 14px 0px;
+    width: 100%;
+    height: 45px;
+    border-radius: 2px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    pointer-events: auto;
+    border: none;
+    outline-color: transparent;
+    outline-style: none;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: #00C076;
+    color: white;
+}
+
+.market-cap-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: fit-content;
+    padding: 0.62rem 0 0.62rem 0;
+    background-color: #18181B;
+    border-radius: 10px;
+}
+
+.market-cap-label {
+    font-size: 14px;
+    color: #727272;
+    font-weight: 500;
+    padding-left: 1rem;
+}
+
+.market-cap-text {
+    color: #fff;
+    font-weight: 500;
+    font-size: 15px;
+    padding-right: 1rem;
+}
+
+.artwork-container {
+    width: 100%;
+    height: fit-content;
+}

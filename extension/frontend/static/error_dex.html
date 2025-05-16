@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/flowbite.css">
+    <link rel="stylesheet" href="../styles/global.css">
+    <title>tradeflow.fun</title>
+    <style>
+        .option {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            height: 4rem;
+            background-color: #18181B;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .icon-holder {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2.4rem;
+            height: 2.4rem;
+            background-color: rgb(26, 26, 26);
+            border-radius: 50%;
+            margin-left: 0.9rem;
+            overflow: hidden;
+        }
+
+        .name-holder {
+            position: relative;
+            top: 1.4rem;
+            color: white;
+            margin-left: 0.8rem;
+        }
+
+        .name-holder p {
+            font-size: 15px;
+        }
+
+        .arror-holder {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 2rem;
+            height: 100%;
+            right: 1.2rem;
+        }
+    </style>
+    <style>
+        .error-animation {
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 3rem 0 3rem 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 22px;
+            font-weight: 500;
+            padding-bottom: 1rem;
+        }
+
+        p {
+            text-align: center;
+            color: #727272;
+            margin-bottom: 8rem;
+            font-size: 16px;
+        }
+
+        .large-button-cus {
+            display: flex;
+            flex-direction: row;
+            -webkit-box-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            align-items: center;
+            padding: 14px 0px;
+            width: 100%;
+            height: 45px;
+            border-radius: 2px;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 19px;
+            pointer-events: auto;
+            border: none;
+            outline-color: transparent;
+            outline-style: none;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            background: #5c51ff;
+            color: white;
+        }
+
+        .checkmark {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #d72828;
+            stroke-miterlimit: 10;
+            box-shadow: inset 0px 0px 0px #d72828;
+            animation: scale .4s ease-in-out;
+            position: relative;
+            top: 5px;
+            right: 5px;
+            margin: 0 auto;
+        }
+
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #d72828;
+            fill: #1F1F21;
+
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+        }
+
+
+        @keyframes scale {
+
+            0%,
+            100% {
+                transform: none;
+            }
+
+            50% {
+                transform: scale3d(1.1, 1.1, 1);
+            }
+        }
+    </style>
+</head>
+
+<body class="ns">
+    <header class="tradeview-header">
+        <div class="navigation">
+            <div class="logoHolder">
+                <img src="../img/logo_light.svg" alt="tradeflow.fun" width="100%" height="auto">
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+
+        <div class="error-animation">
+            <svg class="checkmark" width="75" height="75" style="overflow:visible;enable-background:new 0 0 32 32"
+                viewBox="0 0 32 32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g>
+                    <g id="Error_1_">
+                        <g id="Error">
+                            <circle class="checkmark__circle" cx="16" cy="16" id="BG" r="16" style="fill:#D72828;" />
+                            <path class="checkmark__check" d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z"
+                                id="Exclamatory_x5F_Sign" style="fill:#E6E6E6;" />
+                        </g>
+                    </g>
+                </g>
+            </svg>
+
+
+        </div>
+
+        <h1 id="order-status">Token Not Found!</h1>
+        <p>Unable to fetch token data.</p>
+
+        <button class="large-button-cus mt-8" id="minimizeButton">OK</button>
+
+    </div>
+
+    <script src="../scripts/popup_minimize.js"></script>
+</body>
+
+</html>

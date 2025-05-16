@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/flowbite.css">
+    <link rel="stylesheet" href="styles/tradeView.css">
+    <link rel="stylesheet" href="styles/global.css">
+    <script src="scripts/global.js"></script>
+    <script src="scripts/flowbite.min.js"></script>
+    <title>tradeflow.fun</title>
+    <style>
+        body {
+            width: 400px !important;
+            height: 595px !important;
+        }
+
+        .bs-tab-btn {
+            font-size: 19px;
+            font-weight: 600;
+        }
+
+        .eNzFeu {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            padding: 15px;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: start;
+            justify-content: flex-start;
+        }
+
+        .token-data-holder {
+            background-color: #18181B;
+            border-radius: 10px;
+            margin-bottom: 0.8rem;
+        }
+
+        .token-group-1 {
+            position: relative;
+            left: 0.9rem;
+        }
+
+        .token-name {
+            color: white;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .token-holding {
+            color: #727272;
+            font-size: 14px;
+        }
+
+        .flex-settings {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .token-value-realtime-con {
+            display: flex;
+            min-width: 2rem;
+            justify-content: center;
+            align-items: center;
+            padding-right: 1.2rem;
+        }
+
+        .token-val-usd {
+            color: white;
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+        .t-img-box {
+            width: 44px;
+            height: 44px;
+            overflow: hidden;
+            border-radius: 50%;
+        }
+
+        #loading_overlay {
+            position: fixed;
+            display: block;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+        }
+
+        .loading_text {
+            color: #969393;
+        }
+
+        .loaing-parent-div {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .spinner-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sidebar {
+            background-color: black;
+        }
+
+        .tradeview-header {
+            display: flex;
+            justify-content: space-between;
+            height: 4rem;
+            border-bottom: 1px solid #444746;
+            margin-bottom: 1rem;
+        }
+
+        .logoHolder {
+            position: relative;
+            width: 156px;
+            top: 1.4rem;
+            left: 1.5rem;
+        }
+
+        .navigation {
+            display: flex;
+        }
+
+        .order-loader {
+            width: 16px;
+            height: 16px;
+            border: 2.5px solid #FFF;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .coin-analysis-container {
+            background-color: #1F1F21;
+            width: 100% !important;
+            height: 533px;
+        }
+
+        .analysis_menu {
+            display: flex;
+            width: 100%;
+            height: 2rem;
+            background-color: red;
+        }
+
+        .analysis-title {
+            color: white;
+            font-weight: 500;
+        }
+
+
+        .glassmorphism {
+            background: transparent !important;
+            background-color: transparent !important;
+            background: rgba(20, 20, 20, 0.3) !important;
+            /* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); */
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .bg-gray-900 {
+            background-color: #131313 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading_overlay" style="display: block;">
+        <div class="flex h-screen justify-center items-center">
+            <div class="loaing-parent-div">
+                <div class="mb-3">
+                    <div role="status" class="spinner-box ">
+                        <svg aria-hidden="true" role="status" class="inline w-6 h-6 me-3 text-white animate-spin"
+                            viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                fill="#E5E7EB" />
+                            <path
+                                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                fill="currentColor" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="loading_text">
+                    <p class="text-center ns" id="loading_text">Fetching token details, please wait.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header class="tradeview-header ns" style="margin-bottom: 0 !important; border: 0 !important;">
+        <div class="navigation">
+            <div class="logoHolder">
+                <img src="http://tradeflow.fun/images/logo_light.svg" alt="tradeflow.fun" width="100%" height="auto">
+            </div>
+        </div>
+
+        <div class="balance-holder-parent">
+            <div class="sol-ico">
+                <svg width="16" height="16" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M1.33872 4.0155C1.36842 3.9858 1.40925 3.96848 1.45256 3.96848H5.38033C5.45207 3.96848 5.48798 4.0551 5.43724 4.10583L4.66136 4.88173C4.63166 4.91143 4.59081 4.92875 4.54748 4.92875H0.619748C0.547975 4.92875 0.512086 4.84213 0.562825 4.79139L1.33872 4.0155Z"
+                        fill="#727272" />
+                    <path
+                        d="M1.33872 1.11846C1.36966 1.08876 1.41049 1.07144 1.45256 1.07144H5.38033C5.45207 1.07144 5.48798 1.15806 5.43724 1.2088L4.66136 1.9847C4.63166 2.0144 4.59081 2.03172 4.54748 2.03172H0.619748C0.547975 2.03172 0.512086 1.9451 0.562825 1.89436L1.33872 1.11846Z"
+                        fill="#727272" />
+                    <path
+                        d="M4.66136 2.55734C4.63166 2.52764 4.59081 2.51031 4.54748 2.51031H0.619748C0.547975 2.51031 0.512086 2.59694 0.562825 2.64768L1.33872 3.42357C1.36842 3.45327 1.40925 3.47059 1.45256 3.47059H5.38033C5.45207 3.47059 5.48798 3.38397 5.43724 3.33324L4.66136 2.55734Z"
+                        fill="#727272" />
+                </svg>
+            </div>
+            <div>
+                <p class="sol-bal" id="sol-bal" value="">-</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="artwork-container">
+        <!-- <svg width="400" height="521" viewBox="0 0 400 521" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_2255_131)">
+                <rect width="400" height="521" fill="url(#paint0_linear_2255_131)" />
+                <g filter="url(#filter0_f_2255_131)">
+                    <ellipse cx="200" cy="-48" rx="237" ry="245" fill="#8800FF" fill-opacity="0.45" />
+                </g>
+            </g>
+            <defs>
+                <filter id="filter0_f_2255_131" x="-327" y="-583" width="1054" height="1070"
+                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="145" result="effect1_foregroundBlur_2255_131" />
+                </filter>
+                <linearGradient id="paint0_linear_2255_131" x1="200" y1="0" x2="200" y2="543.076"
+                    gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#181818" />
+                    <stop offset="1" stop-color="#1F1F21" />
+                </linearGradient>
+                <clipPath id="clip0_2255_131">
+                    <rect width="400" height="521" fill="white" />
+                </clipPath>
+            </defs>
+        </svg> -->
+        <svg width="400" height="521" viewBox="0 0 400 521" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_2255_131)">
+                <rect width="400" height="521" fill="url(#paint0_linear_2255_131)" />
+                <g filter="url(#filter0_f_2255_131)">
+                    <ellipse cx="200" cy="-48" rx="237" ry="245" fill="#6A13FF" fill-opacity="0.51" />
+                </g>
+            </g>
+            <defs>
+                <filter id="filter0_f_2255_131" x="-327" y="-583" width="1054" height="1070"
+                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="145" result="effect1_foregroundBlur_2255_131" />
+                </filter>
+                <linearGradient id="paint0_linear_2255_131" x1="200" y1="0" x2="200" y2="543.076"
+                    gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#181818" />
+                    <stop offset="1" stop-color="#1F1F21" />
+                </linearGradient>
+                <clipPath id="clip0_2255_131">
+                    <rect width="400" height="521" fill="white" />
+                </clipPath>
+            </defs>
+        </svg>
+
+    </div>
+
+    <div class="container" style="display: block; position: relative; top: -500px;">
+        <div width="100%" class="token-data-holder flex-settings glassmorphism">
+            <div class="sc-gKclnd sc-dkqQuH eNzFeu fDDpFJ" style="width: fit-content !important;">
+                <div class="token-icon-holder ns">
+                    <div class="t-img-box">
+                        <img id="token_image" src="http://tradeflow.fun/images/user_unknown.png" width="100%"
+                            height="100%">
+                    </div>
+                </div>
+
+                <div class="token-group-1">
+                    <div class="sc-gXRojI hfHEMv">
+                        <div>
+                            <div width="100%" class="sc-gKclnd sc-ksHpcM jFeLnC">
+                                <div class="sc-kYHfwS joqseV">
+                                    <p class="token-name ns" id="token_name">Token Name</p>
+                                </div>
+                            </div>
+                            <div width="100%" class="sc-gKclnd sc-ksHpcM caLBky">
+                                <p class="token-holding" id="token_holding">-</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="token-value-realtime-con ns">
+                <h2 class="token-val-usd" id="realtime-usd-value">~$-</h2>
+            </div>
+
+        </div>
+
+        <div class="flex justify-between space-x-4 ns" style="margin-bottom: 0.8rem;">
+            <div class="pricing-style flex-1 text-center glassmorphism">
+                <p class="pricing-label">Price USD</p>
+                <p class="price-label" id="price_us">-</p>
+            </div>
+            <div class="pricing-style flex-1 text-center glassmorphism">
+                <p class="pricing-label">Price</p>
+                <p class="price-label" id="price_sol" value="-">-</p>
+                <p style="display: none;" id="sol-rate" value="-"></p>
+            </div>
+        </div>
+
+        <div class="market-cap-container ns glassmorphism" style="margin-bottom: 2rem;">
+            <div>
+                <p class="market-cap-label">Market Cap</p>
+            </div>
+            <div>
+                <p class="market-cap-text"><span id="market-cap"></span></p>
+            </div>
+        </div>
+
+        <div class="buy-sell-tab ns">
+            <div class="tab-list-parent">
+                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-styled-tab"
+                    data-tabs-toggle="#default-styled-tab-content" role="tablist">
+                    <li class="me-2" role="presentation">
+                        <button class="inline-block p-4 bs-tab-btn" data-tabs-target="#buy-tab" type="button" role="tab"
+                            aria-controls="buy" aria-selected="false">
+                            Buy
+                        </button>
+                    </li>
+                    <li class="me-2 bs-tab-btn" role="presentation">
+                        <button class="inline-block p-4" style="position: relative; right: 1.5rem;"
+                            data-tabs-target="#sell-tab" type="button" role="tab" aria-controls="sell"
+                            aria-selected="false">
+                            Sell
+                        </button>
+                    </li>
+                </ul>
+
+
+
+                <div class="flex">
+                    <div class="user-edu-ico" id="transactions-btn" style="right: 1.1rem;">
+                        <div style="cursor: pointer;">
+                            <svg width="35" height="21" viewBox="0 0 70 41" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M54.0381 14.9564L34.9385 34.8737L24.3542 25.0713L25.4486 23.5427L33.2001 30.6857L33.297 30.7766C33.6523 31.0989 34.1215 31.2674 34.6013 31.245C35.0812 31.2226 35.5325 31.0112 35.8561 30.6573L36.4774 29.9526L39.4241 26.7079L52.4365 13.479L54.0381 14.9564ZM54.8303 24.8781V21.0254C54.8276 20.9932 54.8276 20.9609 54.8303 20.9288C54.8987 19.224 56.0444 18.6558 57.589 19.1501C57.673 19.1792 57.7519 19.2214 57.8227 19.2752C61.7212 22.3267 65.3519 25.3725 69.222 28.424L69.2733 28.4752C69.5486 28.6799 69.7597 28.9586 69.8819 29.2786C70.004 29.5987 70.0321 29.9468 69.9629 30.2822C69.8011 30.8469 69.4488 31.3386 68.9655 31.6744L58.4895 40.13C56.6428 41.5791 54.7163 41.3063 54.7163 38.6412C54.7163 37.4536 54.7163 36.2546 54.7163 35.0669H39.8402L49.6322 24.8384L54.8303 24.8781ZM17.4006 18.7865C17.4006 19.7184 17.4861 20.8663 17.4006 21.7755C17.3812 22.1234 17.3161 22.4673 17.2068 22.7983C17.0212 23.3929 16.637 23.9063 16.1182 24.2531C15.6091 24.5757 15.0104 24.7289 14.4083 24.6906C13.9956 24.6618 13.5889 24.5758 13.2 24.4349C13.1 24.4008 13.0028 24.359 12.9093 24.3099C12.8186 24.2583 12.731 24.2014 12.6471 24.1394C10.7719 22.6733 8.82833 21.0936 6.87905 19.5195C5.06655 18.0477 3.24836 16.5759 1.22498 14.9735L1.11099 14.8712C0.689088 14.5228 0.360146 14.0757 0.153441 13.5699L0.119243 13.4562C-0.0199288 13.0008 -0.0376091 12.517 0.0679464 12.0527C0.173069 11.6285 0.367343 11.2314 0.637913 10.8877C0.882439 10.5662 1.16792 10.2777 1.48716 10.0297C5.00956 7.38729 8.44645 4.30736 11.9688 1.57974C12.7411 0.917846 13.7107 0.528363 14.7275 0.47165C15.1203 0.467621 15.5094 0.54907 15.8674 0.710317C16.233 0.877167 16.5534 1.12845 16.8022 1.44336C17.3124 2.15961 17.5654 3.02652 17.5203 3.9039V6.38148H31.7068L29.6036 8.57494H16.3918C16.2476 8.57346 16.1051 8.54358 15.9725 8.48702C15.8399 8.43046 15.7199 8.34833 15.6193 8.24536C15.5186 8.14238 15.4394 8.02059 15.3861 7.88699C15.3328 7.75339 15.3066 7.6106 15.3089 7.46685C15.3089 6.64856 15.3089 5.81891 15.3089 5.00063V3.9039C15.3461 3.51731 15.2582 3.12899 15.0581 2.79581C15.0257 2.75378 14.985 2.71894 14.9384 2.69352C14.8712 2.66785 14.7994 2.65624 14.7275 2.65943C14.2017 2.71894 13.7086 2.94385 13.3197 3.30155L2.84938 11.7515C2.68208 11.8767 2.53253 12.0239 2.40481 12.189C2.32456 12.2874 2.26627 12.4017 2.23382 12.5243C2.21345 12.6103 2.21345 12.6998 2.23382 12.7857V12.8368C2.312 13.0121 2.4289 13.1675 2.5758 13.2914C4.42249 14.7348 6.34328 16.2861 8.27546 17.8375C10.2077 19.3888 11.9403 20.8094 13.9751 22.3835C14.149 22.4386 14.3289 22.4729 14.5109 22.4858C14.6594 22.5001 14.8087 22.4684 14.9384 22.3949C15.0444 22.3185 15.1209 22.2082 15.155 22.0823C15.1988 21.9401 15.2256 21.7933 15.2348 21.6448V17.667C15.2391 17.3854 15.3524 17.1165 15.551 16.9163C15.7497 16.7161 16.0183 16.6003 16.3006 16.593H21.9148L19.9028 18.6955L19.823 18.7865H17.4006ZM53.5137 9.80237L34.4198 29.7196L23.8355 19.9173L42.9351 0L53.5137 9.80237ZM41.4589 14.0074C41.6787 14.6166 41.7124 15.277 41.5557 15.9053C41.3991 16.5335 41.059 17.1013 40.5787 17.5369C40.0983 17.9724 39.4992 18.2562 38.8571 18.3523C38.215 18.4484 37.5587 18.3525 36.9713 18.0768C36.3838 17.801 35.8916 17.3578 35.5568 16.8031C35.222 16.2484 35.0597 15.6072 35.0904 14.9606C35.1211 14.314 35.3435 13.6909 35.7294 13.1703C36.1152 12.6496 36.6473 12.2548 37.2583 12.0356C37.6639 11.8901 38.0944 11.8256 38.5251 11.846C38.9557 11.8663 39.3781 11.971 39.7682 12.1541C40.1583 12.3372 40.5084 12.5951 40.7984 12.9131C41.0885 13.2311 41.313 13.603 41.4589 14.0074ZM48.7431 11.7344L35.9815 24.8156C35.5661 24.433 35.0156 24.2301 34.4504 24.2515C33.8853 24.2728 33.3517 24.5165 32.9664 24.9293L28.7829 21.0595C29.1666 20.6453 29.3701 20.0964 29.3487 19.533C29.3274 18.9695 29.0829 18.4375 28.6689 18.0534L41.4304 4.93244C41.636 5.12431 41.8777 5.27367 42.1415 5.37189C42.4053 5.47011 42.686 5.51523 42.9674 5.50467C43.2489 5.4941 43.5254 5.42805 43.781 5.31032C44.0367 5.1926 44.2664 5.02554 44.4569 4.81879L48.6462 8.69428C48.2614 9.10865 48.0567 9.65807 48.077 10.2224C48.0973 10.7868 48.3409 11.3202 48.7545 11.706L48.7431 11.7344Z"
+                                    fill="#6B7280" />
+                            </svg>
+
+
+                        </div>
+                    </div>
+
+                    <div class="user-edu-ico" id="settings-btn">
+                        <div style="cursor: pointer;">
+                            <svg width="17" height="17" viewBox="0 0 18 18" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_2362_7)">
+                                    <path
+                                        d="M9.00023 12.1687C9.89398 12.1687 10.6581 11.8588 11.2926 11.239C11.9271 10.6191 12.2443 9.87266 12.2443 8.99955C12.2443 8.12644 11.9271 7.37997 11.2926 6.76014C10.6581 6.14031 9.89398 5.8304 9.00023 5.8304C8.10648 5.8304 7.34237 6.14031 6.70789 6.76014C6.0734 7.37997 5.75616 8.12644 5.75616 8.99955C5.75616 9.87266 6.0734 10.6191 6.70789 11.239C7.34237 11.8588 8.10648 12.1687 9.00023 12.1687ZM15.8768 9.88738L17.8232 11.366C18.0249 11.507 18.0538 11.7042 17.9099 11.9578L16.0503 15.0846C15.9349 15.2817 15.7475 15.338 15.4879 15.2536L13.1956 14.3662C12.59 14.7886 12.071 15.0844 11.6386 15.2536L11.2926 17.6196C11.2348 17.8732 11.0905 18 10.8598 18H7.14015C6.90949 18 6.76524 17.8732 6.70742 17.6196L6.36143 15.2536C5.81368 15.0282 5.29468 14.7324 4.80444 14.3662L2.5121 15.2536C2.25252 15.338 2.06507 15.2817 1.94974 15.0846L0.0901194 11.9578C-0.0541229 11.7042 -0.0252129 11.507 0.176849 11.366L2.1232 9.88738C2.09429 9.69028 2.07983 9.39449 2.07983 9C2.07983 8.60551 2.09429 8.30971 2.1232 8.11262L0.176849 6.63395C-0.0249054 6.49304 -0.0538153 6.29579 0.0901194 6.04221L1.94974 2.91542C2.06507 2.71833 2.25252 2.66199 2.5121 2.74642L4.80444 3.6338C5.41001 3.21137 5.92901 2.91557 6.36143 2.74642L6.70742 0.380371C6.76524 0.12679 6.90949 0 7.14015 0H10.8598C11.0905 0 11.2348 0.12679 11.2926 0.380371L11.6386 2.74642C12.1863 2.97176 12.7053 3.26755 13.1956 3.6338L15.4879 2.74642C15.7475 2.66199 15.9349 2.71833 16.0503 2.91542L17.9099 6.04221C18.0541 6.29579 18.0252 6.49304 17.8232 6.63395L15.8768 8.11262C15.9057 8.30971 15.9202 8.60551 15.9202 9C15.9202 9.39449 15.9057 9.69028 15.8768 9.88738Z"
+                                        fill="#6B7280" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_2362_7">
+                                        <rect width="18" height="18" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+
+                        </div>
+                    </div>
+
+
+                    <div class="user-edu-ico" id="user-edu-btn" data-tooltip-target="tooltip-left"
+                        data-tooltip-placement="left" style="margin-left: 0.75rem;">
+                        <div style="cursor: pointer;">
+                            <svg width="18" height="18" viewBox="0 0 46 46" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M18.3102 17.3025C17.9744 18.3353 16.8635 18.9015 15.8306 18.5657C14.7978 18.2299 14.2316 17.1189 14.5674 16.0861C15.6998 12.6108 19.1557 10.3946 22.8635 10.3946C27.4733 10.3946 31.5325 13.8231 31.5325 18.4033C31.5325 21.5409 29.5508 24.2663 26.7373 25.5668C25.5209 26.1291 24.8356 27.2049 24.8356 28.5482C24.8356 29.6376 23.9531 30.5201 22.8636 30.5201C21.7742 30.5201 20.8917 29.6376 20.8917 28.5482C20.8917 25.6996 22.4985 23.1885 25.0875 21.994C27.8307 20.7268 28.4555 17.558 26.2804 15.5977C24.5915 14.0748 21.8561 13.9186 19.9586 15.1974C19.1718 15.7285 18.5841 16.4626 18.3088 17.3041L18.3102 17.3025ZM23 0C10.2974 0 0 10.2974 0 23C0 35.7026 10.2974 46 23 46C35.7026 46 46 35.7026 46 23C46 10.2974 35.7026 0 23 0ZM42.0579 23C42.0579 12.4742 33.5258 3.94213 23 3.94213C12.4742 3.94213 3.94213 12.4742 3.94213 23C3.94213 33.5258 12.4742 42.0579 23 42.0579C33.5258 42.0579 42.0579 33.5258 42.0579 23ZM21.0302 33.6233C21.0302 32.5338 21.9127 31.6513 23.0022 31.6513C24.0916 31.6513 24.9741 32.5299 24.9741 33.6351C24.9741 34.7245 24.0916 35.607 23.0022 35.607C21.9127 35.607 21.0302 34.7284 21.0302 33.6253V33.6233Z"
+                                    fill="#6B7280" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div id="tooltip-left" role="tooltip"
+                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+                        Learn what all of this is
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="default-styled-tab-content">
+                <div class="hidden" id="buy-tab" role="tabpanel" aria-labelledby="buy-tab">
+                    <div class="flex justify-center items-center space-x-4 mt-2">
+                        <div class="price-taker-input-parent-main">
+                            <div class="price-taker-input-parent-parent">
+                                <div class="flex">
+                                    <div class="coin-image-placeholder sol-image-buy-container ns">
+                                        <img src="img/solana.png" class="sol-image-buy-im" width="30px" height="30px">
+                                    </div>
+                                    <div class="price-taker-input-parent">
+                                        <div class="price-taker-input-parent">
+                                            <input type="text" autocomplete="off" autofill="off"
+                                                class="w-full h-full price-taker-input" placeholder="Amount"
+                                                id="price_buy_input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="presets-container">
+                                    <div class="preset-option" id="buy_p1">0.01</div>
+                                    <div class="preset-option" id="buy_p2">0.02</div>
+                                    <div class="preset-option" id="buy_p3">0.5</div>
+                                    <div class="preset-option" id="buy_p4">1</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slippage-taker-input-parent-main">
+                            <div class="slippage-taker-input-parent">
+                                <div class="flex">
+                                    <div class="coin-image-placeholder sol-image-buy-container ns"
+                                        style="padding-right: 6px;">
+                                        <svg width="23" height="23" viewBox="0 0 46 46" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M25.875 43.125L22.0417 42.3582L23.575 34.1168L16.675 28.9418L14.1833 18.0167L9.96668 21.6583L11.5 28.9418L7.66668 29.7082L5.75 20.3167L14.2792 12.6979C15.0139 12.059 15.8847 11.7958 16.8916 11.9083C17.8985 12.0207 18.8645 12.2679 19.7896 12.65C20.8118 13.0972 21.8743 13.4167 22.977 13.6083C24.0797 13.8 25.1895 13.816 26.3062 13.6562C27.4243 13.4965 28.4548 13.1292 29.3977 12.5542C30.3407 11.9792 31.2429 11.3403 32.1043 10.6375L34.5 13.6083C33.5418 14.3431 32.5513 15.0299 31.5293 15.6687C30.5069 16.3076 29.4049 16.8028 28.2229 17.1542C27.1688 17.4417 26.1069 17.5937 25.0374 17.6103C23.9679 17.6269 22.9054 17.5068 21.85 17.25L23.1917 23.1917L30.2832 21.85L40.25 28.9418L37.95 32.0082L29.7082 26.2584L22.8083 27.6L27.9833 31.4332L25.875 43.125ZM15.3333 10.5417C14.2792 10.5417 13.3764 10.166 12.6251 9.41468C11.8737 8.66332 11.4987 7.76123 11.5 6.70832C11.5 5.65418 11.8757 4.75143 12.627 4.00007C13.3783 3.24875 14.2804 2.87373 15.3333 2.875C16.3875 2.875 17.2903 3.25068 18.0416 4.002C18.7929 4.75332 19.1679 5.65544 19.1667 6.70832C19.1667 7.7625 18.791 8.66525 18.0397 9.41657C17.2883 10.1679 16.3862 10.5429 15.3333 10.5417Z"
+                                                fill="#6b7280" />
+                                        </svg>
+                                    </div>
+                                    <input type="text" autocomplete="off" autofill="off"
+                                        class="w-full h-full price-taker-input" placeholder="Slippage %"
+                                        id="slippage_buy_input">
+                                </div>
+                            </div>
+                            <div class="presets-container">
+                                <div class="preset-option" id="buy_slippage_p1">0.1%</div>
+                                <div class="preset-option" id="buy_slippage_p2">0.5%</div>
+                                <div class="preset-option" id="buy_slippage_p3">1%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <p class="minimum-tokens ns" id="buy_assist_label">Enter a price</p>
+                    </div>
+
+                    <button class="buy-button mt-3 ns" id="buy-button">Purchase Tokens</button>
+
+                </div>
+                <div class="hidden" id="sell-tab" role="tabpanel" aria-labelledby="sell-tab">
+                    <!-- <div class="flex justify-center items-center space-x-4 mt-2">
+                        <div class="flex">
+                            <div class="coin-image-placeholder ns sol-image-buy-container"
+                                style="border-radius: 50%; overflow: hidden;">
+                                <img style="border-radius: 50%;" src="https://tradeflow.fun/images/user_unknown.png"
+                                    id="trx-sell-image" class="sol-image-buy-im" width="30px">
+                            </div>
+                            <div class="price-taker-input-parent">
+                                <input autocomplete="off" autofill="off" type="text"
+                                    class="w-full h-full price-taker-input" placeholder="Tokens" id="price_sell_input">
+                            </div>
+                        </div>
+                        <div class="slippage-taker-input-parent">
+                            <input autocomplete="off" autofill="off" type="text" class="w-full h-full price-taker-input"
+                                placeholder="Slippage %" id="slippage_sell_input">
+                        </div>
+                    </div> -->
+
+                    <div class="flex justify-center items-center space-x-4 mt-2">
+                        <div class="price-taker-input-parent-main">
+                            <div class="price-taker-input-parent-parent">
+                                <div class="flex">
+                                    <div class="coin-image-placeholder sol-image-buy-container ns">
+                                        <img src="https://tradeflow.fun/images/user_unknown.png"
+                                            style="border-radius: 50%; overflow: hidden;" class="sol-image-buy-im"
+                                            width="30px" height="30px">
+                                    </div>
+                                    <div class="price-taker-input-parent">
+                                        <div class="price-taker-input-parent">
+                                            <input autocomplete="off" autofill="off" type="text"
+                                                class="w-full h-full price-taker-input" placeholder="Tokens"
+                                                id="price_sell_input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="presets-container">
+                                    <div class="preset-option" id="sell_p1">25%</div>
+                                    <div class="preset-option" id="sell_p2">50%</div>
+                                    <div class="preset-option" id="sell_p3">MAX</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slippage-taker-input-parent-main">
+                            <div class="slippage-taker-input-parent">
+                                <div class="flex">
+                                    <div class="coin-image-placeholder sol-image-buy-container ns"
+                                        style="padding-right: 6px;">
+                                        <svg width="23" height="23" viewBox="0 0 46 46" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M25.875 43.125L22.0417 42.3582L23.575 34.1168L16.675 28.9418L14.1833 18.0167L9.96668 21.6583L11.5 28.9418L7.66668 29.7082L5.75 20.3167L14.2792 12.6979C15.0139 12.059 15.8847 11.7958 16.8916 11.9083C17.8985 12.0207 18.8645 12.2679 19.7896 12.65C20.8118 13.0972 21.8743 13.4167 22.977 13.6083C24.0797 13.8 25.1895 13.816 26.3062 13.6562C27.4243 13.4965 28.4548 13.1292 29.3977 12.5542C30.3407 11.9792 31.2429 11.3403 32.1043 10.6375L34.5 13.6083C33.5418 14.3431 32.5513 15.0299 31.5293 15.6687C30.5069 16.3076 29.4049 16.8028 28.2229 17.1542C27.1688 17.4417 26.1069 17.5937 25.0374 17.6103C23.9679 17.6269 22.9054 17.5068 21.85 17.25L23.1917 23.1917L30.2832 21.85L40.25 28.9418L37.95 32.0082L29.7082 26.2584L22.8083 27.6L27.9833 31.4332L25.875 43.125ZM15.3333 10.5417C14.2792 10.5417 13.3764 10.166 12.6251 9.41468C11.8737 8.66332 11.4987 7.76123 11.5 6.70832C11.5 5.65418 11.8757 4.75143 12.627 4.00007C13.3783 3.24875 14.2804 2.87373 15.3333 2.875C16.3875 2.875 17.2903 3.25068 18.0416 4.002C18.7929 4.75332 19.1679 5.65544 19.1667 6.70832C19.1667 7.7625 18.791 8.66525 18.0397 9.41657C17.2883 10.1679 16.3862 10.5429 15.3333 10.5417Z"
+                                                fill="#6b7280" />
+                                        </svg>
+                                    </div>
+                                    <input autocomplete="off" autofill="off" type="text"
+                                        class="w-full h-full price-taker-input" placeholder="Slippage %"
+                                        id="slippage_sell_input">
+                                </div>
+                            </div>
+                            <div class="presets-container">
+                                <div class="preset-option" id="sell_slippage_p1">0.1%</div>
+                                <div class="preset-option" id="sell_slippage_p2">0.5%</div>
+                                <div class="preset-option" id="sell_slippage_p3">1%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <p class="minimum-tokens ns" id="sell_assist_label">Enter a price</p>
+                    </div>
+
+                    <button class="buy-button mt-3 ns" style="background-color: rgb(255, 0, 34) !important;"
+                        id="sell-button">Sell Tokens</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/ui/presets.js"></script>
+    <script src="playground.js"></script>
+    <script src="scripts/tradingViewHandler.js"></script>
+
+</body>
+
+</html>
